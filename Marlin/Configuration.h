@@ -310,6 +310,8 @@
  *
  * :{ '0': "Not used", '1':"100k / 4.7k - EPCOS", '2':"200k / 4.7k - ATC Semitec 204GT-2", '3':"Mendel-parts / 4.7k", '4':"10k !! do not use for a hotend. Bad resolution at high temp. !!", '5':"100K / 4.7k - ATC Semitec 104GT-2 (Used in ParCan & J-Head)", '501':"100K Zonestar (Tronxy X3A)", '6':"100k / 4.7k EPCOS - Not as accurate as Table 1", '7':"100k / 4.7k Honeywell 135-104LAG-J01", '8':"100k / 4.7k 0603 SMD Vishay NTCS0603E3104FXT", '9':"100k / 4.7k GE Sensing AL03006-58.2K-97-G1", '10':"100k / 4.7k RS 198-961", '11':"100k / 4.7k beta 3950 1%", '12':"100k / 4.7k 0603 SMD Vishay NTCS0603E3104FXT (calibrated for Makibox hot bed)", '13':"100k Hisens 3950  1% up to 300°C for hotend 'Simple ONE ' & hotend 'All In ONE'", '20':"PT100 (Ultimainboard V2.x)", '51':"100k / 1k - EPCOS", '52':"200k / 1k - ATC Semitec 204GT-2", '55':"100k / 1k - ATC Semitec 104GT-2 (Used in ParCan & J-Head)", '60':"100k Maker's Tool Works Kapton Bed Thermistor beta=3950", '66':"Dyze Design 4.7M High Temperature thermistor", '70':"the 100K thermistor found in the bq Hephestos 2", '71':"100k / 4.7k Honeywell 135-104LAF-J01", '147':"Pt100 / 4.7k", '1047':"Pt1000 / 4.7k", '110':"Pt100 / 1k (non-standard)", '1010':"Pt1000 / 1k (non standard)", '-4':"Thermocouple + AD8495", '-3':"Thermocouple + MAX31855 (only for sensor 0)", '-2':"Thermocouple + MAX6675 (only for sensor 0)", '-1':"Thermocouple + AD595",'998':"Dummy 1", '999':"Dummy 2" }
  */
+// By hostnik: override from pins_TRIGORILLA_14.h
+
 #define TEMP_SENSOR_0 5
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
@@ -379,10 +381,12 @@
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
+  // AUTOTUNE
+
   // i3 Mega stock v5 hotend, 40W heater cartridge (3.6Ω @ 22°C)
-  #define  DEFAULT_Kp 15.94
-  #define  DEFAULT_Ki 1.17
-  #define  DEFAULT_Kd 54.19
+  #define  DEFAULT_Kp 20.28
+  #define  DEFAULT_Ki 1.45
+  #define  DEFAULT_Kd 71.01
 
   // Ultimaker
   //#define  DEFAULT_Kp 22.2
@@ -436,10 +440,20 @@
 
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
+  // AUTOTUNE
+    #define DEFAULT_bedKp 653.86
+    #define DEFAULT_bedKi 95.02
+    #define DEFAULT_bedKd 1124.81
+  //i3 Mega Ultrabase
+//  //from pidautotune
+//  #define  DEFAULT_bedKp 10.00
+//  #define  DEFAULT_bedKi .023
+//  #define  DEFAULT_bedKd 305.4
+
   //Anycubic i3 Mega Ultrabase (0.9Ω @ 22°C)
-  #define DEFAULT_bedKp 251.78
-  #define DEFAULT_bedKi 49.57
-  #define DEFAULT_bedKd 319.73
+//  #define DEFAULT_bedKp 251.78
+//  #define DEFAULT_bedKi 49.57
+//  #define DEFAULT_bedKd 319.73
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -556,14 +570,14 @@
  *          TMC5130, TMC5130_STANDALONE
  * :['A4988', 'DRV8825', 'LV8729', 'L6470', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE']
  */
-#define X_DRIVER_TYPE  TMC2208_STANDALONE // comment out for stock drivers
-#define Y_DRIVER_TYPE  TMC2208_STANDALONE // comment out for stock drivers
-#define Z_DRIVER_TYPE  TMC2208_STANDALONE // comment out for stock drivers
+//#define X_DRIVER_TYPE  TMC2208_STANDALONE // comment out for stock drivers
+//#define Y_DRIVER_TYPE  TMC2208_STANDALONE // comment out for stock drivers
+//#define Z_DRIVER_TYPE  TMC2208_STANDALONE // comment out for stock drivers
 #define X2_DRIVER_TYPE TMC2208_STANDALONE
 #define Y2_DRIVER_TYPE TMC2208_STANDALONE
-#define Z2_DRIVER_TYPE TMC2208_STANDALONE // comment out for stock drivers
-#define E0_DRIVER_TYPE TMC2208_STANDALONE // comment out for stock drivers
-#define E1_DRIVER_TYPE TMC2208_STANDALONE // comment out for stock drivers
+//#define Z2_DRIVER_TYPE TMC2208_STANDALONE // comment out for stock drivers
+//#define E0_DRIVER_TYPE TMC2208_STANDALONE // comment out for stock drivers
+//#define E1_DRIVER_TYPE TMC2208_STANDALONE // comment out for stock drivers
 #define E2_DRIVER_TYPE TMC2208_STANDALONE
 #define E3_DRIVER_TYPE TMC2208_STANDALONE
 #define E4_DRIVER_TYPE TMC2208_STANDALONE
@@ -851,15 +865,15 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR false // set to true for stock drivers or TMC2208 with reversed connectors
-#define INVERT_Y_DIR true // set to false for stock drivers or TMC2208 with reversed connectors
-#define INVERT_Z_DIR true // set to false for stock drivers or TMC2208 with reversed connectors
+#define INVERT_X_DIR true // set to true for stock drivers or TMC2208 with reversed connectors
+#define INVERT_Y_DIR false // set to false for stock drivers or TMC2208 with reversed connectors
+#define INVERT_Z_DIR false // set to false for stock drivers or TMC2208 with reversed connectors
 
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR true // set to false for stock drivers or TMC2208 with reversed connectors
-#define INVERT_E1_DIR true // set to false for stock drivers or TMC2208 with reversed connectors
+#define INVERT_E0_DIR false // set to false for stock drivers or TMC2208 with reversed connectors
+#define INVERT_E1_DIR false // set to false for stock drivers or TMC2208 with reversed connectors
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
 #define INVERT_E4_DIR false
@@ -1266,8 +1280,8 @@
 #define PREHEAT_1_TEMP_BED     70
 #define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
 
-#define PREHEAT_2_TEMP_HOTEND 240
-#define PREHEAT_2_TEMP_BED    110
+#define PREHEAT_2_TEMP_HOTEND 260
+#define PREHEAT_2_TEMP_BED    90
 #define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
 
 /**
