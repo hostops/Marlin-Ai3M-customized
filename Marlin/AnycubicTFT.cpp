@@ -1265,7 +1265,7 @@ void AnycubicTFTClass::GetCommandFromTFT()
               #ifdef ANYCUBIC_TFT_DEBUG
                 SERIAL_ECHOLNPGM("TFT Level checkpoint back right...");
               #endif
-              enqueue_and_echo_commands_P(PSTR("G1 Z5 F240\nG1 X190 Y20 F6000\nG1 Z0 F240"));
+              enqueue_and_echo_commands_P(PSTR("G1 Z5 F240\nG1 X20 Y190 F6000\nG1 Z0 F240"));
             } else if(CodeSeen('H')) {
               #ifdef ANYCUBIC_TFT_DEBUG
                 SERIAL_ECHOLNPGM("TFT Level check no heating...");
